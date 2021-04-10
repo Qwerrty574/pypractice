@@ -41,7 +41,7 @@ def f23(a):
             for k in range(1, len(a[i]) - j):
                 if a[i][j] == a[i][j + k]:
                     a[i][j + k] = None
-            if a[i][j] is not None:
+            if a[i][j] != None:
                 c.insert(j, a[i][j])
         if c:
             b.append(c)
