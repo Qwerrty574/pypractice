@@ -3,28 +3,28 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/main.py">
+        <entry key="/Attachments_demidova.liliya@gmail.com_2021-04-17_16-26-17/German_my_Standard_example.ipynb">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/part1.py">
+        <entry key="/directorie/Untitled0.ipynb">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/struct_tmp.py">
+        <entry key="$PROJECT_DIR$/../../TRPP/pr2/blocknote-master/apps/main/models.py">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/tests.py">
+        <entry key="/test.py">
           <value>
             <Attribute>
               <option name="separator" value="," />
