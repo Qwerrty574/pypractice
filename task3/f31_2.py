@@ -48,18 +48,21 @@ def f31(s_in):
         final_l = []
         c = 4
         struct_l = []
+        """
         type_l = ['5s', 'H', 'b', 'H', 'i', 'Q', 'H', 'b', 'I', 'b', 'd', 'B', 'H', 'H', 'b', 'I', 'b', 'd', 'B', 'H',
                   'H',
                   'I', 'B', 'f', 'h', 'f', 'H', 'I', 'i', 'Q', 'f', 'Q']
         """
+        type_l = []
+        """
         int8 -> b(1)
         uint8 -> B(1)
-        int8 -> h(2)
-        uint8 -> H(2)
-        int8 -> i(4)
-        uint8 -> I(4)
-        int8 -> q(8)
-        uint8 -> Q(8)
+        int16 -> h(2)
+        uint16 -> H(2)
+        int32 -> i(4)
+        uint32 -> I(4)
+        int64 -> q(8)
+        uint64 -> Q(8)
         char[] -> s(1)
         double -> d(8)
         float -> f(4)
@@ -75,14 +78,19 @@ def f31(s_in):
 
     s = parser(s_in)
 
-    struct_D = Struct('D', 5)
-    struct_С = Struct('C', 7)
-    struct_B = Struct('B', 8)
-    struct_A = Struct('A', 6)
+    struct_F = Struct('F', 5)
+    struct_E = Struct('E', 5)
+    struct_D = Struct('D', 4)
+    struct_С = Struct('C', 3)
+    struct_B = Struct('B', 4)
+    struct_A = Struct('A', 4)
 
-    struct_С.gen(['H', 'b', 'I', 'b', 'd', 'B', 'H'])
-    struct_B.gen(['5s', 'H', 'b', 'H', 'i', 'Q', [struct_С.build(), struct_С.build()], ['d']])
-    struct_A.gen([struct_B.build(), 'B', 'f', struct_D.build(), 'f', 'Q'])
+    struct_F.gen(['B', 'i', 'i', 'B', 'f'])
+    struct_E.gen(['f', 'I', 'h', 'b', 'Q'])
+    struct_D.gen(['b', 'd', 'I', 'h'])
+    struct_С.gen(['B', 'i', ['H', 'H', 'H', 'H', 'H', 'H', 'H']])
+    struct_B.gen(['H', 'I', 'H', 'H'])
+    struct_A.gen([['H', 'H'], 'Q', 'H', 'H'])
 
     """
     struct_D.fill(
@@ -95,8 +103,11 @@ def f31(s_in):
                    [unpack('>d', s_in[s[21] + i * 8:s[21] + 8 * (i + 1)])[0] for i in range(s[20])]], s[31]])
     """
 
-    output = json.dumps(struct_A.build(), indent=8)
-    print(struct_A.build())
+    output = json.dumps(struct_A.build(), indent=8) + json.dumps(struct_B.build(), indent=8) + json.dumps(
+        struct_С.build(), indent=8) + json.dumps(struct_D.build(), indent=8) + json.dumps(struct_E.build(),
+                                                                                          indent=8) + json.dumps(
+        struct_F.build(), indent=8)
+    print(struct_A.build(), struct_B.build())
     lbl = Label(window, text=output, font=("Arial Bold", 11), padx=10, pady=5, justify=LEFT)
     lbl.grid(column=0, row=0)
     window.mainloop()
